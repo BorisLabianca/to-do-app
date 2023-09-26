@@ -40,4 +40,24 @@ const deleteTask = async (req, res) => {
   }
 };
 
-module.exports = { createTask, getTasks, getTask, deleteTask };
+const updateTask = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, completed } = req.body;
+    if (!name && !completed)
+      return res
+        .status(500)
+        .send("Please make sure to modify at least one detail.");
+    const taskToUpdate = await Task.findByIdAndUpdate({ _id: id }, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!taskToUpdate)
+      return res.status(404).json(`No task found with id ${id}`);
+    res.status(200).json(taskToUpdate);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createTask, getTasks, getTask, deleteTask, updateTask };
