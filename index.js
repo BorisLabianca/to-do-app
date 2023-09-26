@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
 const connectDB = require("./config/connectDB");
 const mongoose = require("mongoose");
@@ -6,6 +7,7 @@ const Task = require("./models/Task");
 const tasksRoutes = require("./routes/tasks");
 
 const app = express();
+app.use(cors());
 mongoose.connect(process.env.MONGODB_URI);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
