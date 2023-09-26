@@ -9,13 +9,18 @@ const {
 } = require("../controllers/tasks");
 const router = express.Router();
 
-router.post("/api/add-tasks", createTask);
+// Routes
+// Create
+router.post("/add-tasks", createTask);
 
-router.get("/api/all-tasks", getTasks);
-router.get("/api/all-tasks/single-Task/:id", getTask);
+// Read
+router.get("/all-tasks", getTasks);
+router.get("/single-Task/:id", getTask);
 
-router.put("/api/all-tasks/update/:id", updateTask);
+// Update
+router.put("/update/:id", updateTask);
 
-router.delete("/api/all-tasks/delete/:id", deleteTask);
+// Delete
+router.delete("/delete/:id", deleteTask);
 
 module.exports = router;
